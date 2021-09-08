@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        body {
+            background: #cdcdcd;
+        }
+        
+        #wrap {
+            width: 100%;
+            background: #000;
+            height: 50px;
+        }
+        
+        #wrap #header {
+            width: 100%;
+        }
+        
+        #wrap #header .content {
+            width: 620px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        #wrap #header .content .left {
+            width: 100px;
+            line-height: 50px;
+            color: #DDD;
+            font-size: 24px;
+            cursor: pointer;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        
+        #title {
+            width: 60%;
+            height: 24px;
+            margin-top: 12px;
+            text-indent: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 0 rgb(255 255 255 / 24%), 0 1px 6px rgb(0 0 0 / 45%) inset;
+            border: none;
+        }
+        
+        #main {
+            width: 100%;
+        }
+        
+        #main .content {
+            width: 620px;
+            margin: 0 auto;
+        }
+        
+        #main .content h2 {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 1.5em;
+            margin-block-start: 0.83em;
+            margin-block-end: 0.83em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight: bold;
+        }
+        
+        #main .content h2 span {
+            display: inline-block;
+            padding: 0 5px;
+            height: 20px;
+            border-radius: 20px;
+            background: #E6E6FA;
+            line-height: 22px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .todolist {
+            width: 100%;
+        }
+        
+        .todolist li {
+            width: 100%;
+            height: 32px;
+            line-height: 32px;
+            background: #fff;
+            position: relative;
+            margin-bottom: 10px;
+            padding: 0 45px;
+            border-radius: 3px;
+            border-left: 5px solid #629A9C;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 7%);
+            display: flex;
+            align-items: center;
+        }
+        
+        .todolist li input {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+        
+        .todolist li p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+        
+        .todolist li a {
+            display: inline-block;
+            width: 14px;
+            height: 12px;
+            border-radius: 14px;
+            border: 6px double #FFF;
+            background: #CCC;
+            line-height: 14px;
+            text-align: center;
+            color: #FFF;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .todolist-2 {
+            width: 100%;
+        }
+        
+        .todolist-2 li {
+            width: 100%;
+            height: 32px;
+            line-height: 32px;
+            background: #fff;
+            position: relative;
+            margin-bottom: 10px;
+            padding: 0 45px;
+            border-radius: 3px;
+            border-left: 5px solid #629A9C;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 7%);
+            display: flex;
+            align-items: center;
+        }
+        
+        .todolist-2 li input {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+        
+        .todolist-2 li p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+        
+        .todolist-2 li a {
+            display: inline-block;
+            width: 14px;
+            height: 12px;
+            border-radius: 14px;
+            border: 6px double #FFF;
+            background: #CCC;
+            line-height: 14px;
+            text-align: center;
+            color: #FFF;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="header">
+            <div class="content">
+                <div class="left">ToDoList</div>
+                <input type="text" ref="Input" id="title" v-model="phone" placeholder="添加ToDo" @keyup.enter="add">
+            </div>
+
+        </div>
+        <div id="main">
+            <div class="content">
+                <h2>正在进行 <span>{{arr.length}}</span></h2>
+                <ol class="todolist">
+                    <li v-for="(item,index) in arr" :key="index">
+                        <input type="checkbox" @click="checks(index)" />{{item}}
+                        <a href="#" @click="btn"></a>
+                    </li>
+                </ol>
+                <h2>已经完成 <span>{{arr2.length}}</span></h2>
+                <ol class="todolist-2">
+                    <li v-for="(item,index) in arr2" :key="index">
+                        <input type="checkbox" @click="check(index)" checked/> {{item}}
+                        <a href="#" @click="btn1"></a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#wrap",
+            data: {
+                phone: "",
+                arr: [],
+                arr2: [],
+            },
+            methods: {
+                add() {
+                    this.arr.push(this.phone)
+                    this.phone = ''
+                        // console.log(1, this.$refs.Input);
+                },
+                check(index) {
+                    this.arr.push(this.arr2[index])
+                    this.arr2.splice(index, 1)
+                },
+                checks(index) {
+                    this.arr2.push(this.arr[index])
+                    this.arr.splice(index, 1)
+                },
+                btn() {
+                    this.arr.shift()
+                },
+                btn1() {
+                    this.arr2.shift()
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

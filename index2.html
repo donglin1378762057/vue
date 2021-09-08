@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="time">
+        距离2021-9-10还有 <span>{{day}}</span>天<span>{{hour}}</span>小时<span>{{min}}</span>分钟<span>{{second}}</span>秒
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#time',
+            data: {
+                // curStartTime: '2021-09-10 08:00:00',
+                day: "0",
+                hour: "00",
+                min: "00",
+                second: "00"
+            },
+            methods: {
+                countTime() {
+                    // let date = +new Date() - new Date('2021-9-10:0:0:0')
+                    // console.log(data);
+
+                    let date = +new Date()
+                    console.log(date);
+                    // 设置截止时间
+                    let endDate = +new Date('2021-09-10 08:00:00')
+                    console.log(endDate);
+                    // 时间差
+                    let leftTime = endDate - date
+
+                    // 定义变量 d,h,m,s保存倒计时的时间
+                    if (leftTime >= 0) {
+                        // 天
+                        this.day = Math.floor(leftTime / 1000 / 60 / 60 / 24)
+                            // 时
+
+                        let h = Math.floor(leftTime / 1000 / 60 / 60 % 24)
+                        this.hour = h < 10 ? '0' + h : h
+                            // 分
+                        let m = Math.floor(leftTime / 1000 / 60 % 60)
+                        this.min = m < 10 ? '0' + m : m
+                            // 秒
+                        let s = Math.floor(leftTime / 1000 % 60)
+                        this.second = s < 10 ? '0' + s : s
+                    } else {
+                        this.day = 0
+                        this.hour = '00'
+                        this.min = '00'
+                        this.second = '00'
+                    }
+                    // 等于0的时候不调用
+                    if (Number(this.hour) === 0 && Number(this.day) === 0 && Number(this.min) === 0 && Number(this.second) === 0) {
+                        return
+                    }
+                },
+            }
+        })
+        setInterval(() => {
+            vm.countTime()
+        }, 1000);
+    </script>
+</body>
+
+</html>

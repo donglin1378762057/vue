@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{bbb}} {{ccc}}
+        <div v-html="html"></div>
+        <div v-bind:title="1+1">{{abc}}</div>
+        <ul>
+            <li v-for="(item,index) in arr" :key="index">{{item}}
+                <span v-if="index > 2">2</span>
+            </li>
+            <button @click="add">点击</button>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                bbb: "我叫董林",
+                abc: '123jhdaghgkoj',
+                arr: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+                hhh: '啊哈哈哈',
+                ccc: '',
+                html: "<h2>标题</h2><p>文本</p>"
+            },
+            methods: {
+                add() {
+                    this.arr.push('c')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

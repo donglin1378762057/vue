@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{msg}}</div>
+        <ul>
+            <li v-for="(item,index) in arr" :key="index">{{item}}{{index}}</li>
+        </ul>
+        <button @click="clickfn">搜索</button>
+        <input type="text" v-model="phone">
+        <span v-if="phone.length == 11">手机号正确</span>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'ahhahah',
+                arr: ['a', 's', 'c', 'f', 'g', 'w'],
+                phone: ''
+            },
+            methods: {
+                clickfn() {
+                    console.log(123);
+                    this.arr.push(this.arr.length + 1)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
